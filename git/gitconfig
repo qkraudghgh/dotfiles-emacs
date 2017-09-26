@@ -1,0 +1,54 @@
+# vim: set ft=gitconfig:
+
+[include]
+    # include external gitconfig file (requires git 1.7.10+)
+    # typically, user.name and user.email is configured.
+    path = ~/.gitconfig_secret
+
+[core]
+    excludesfile = ~/.gitignore
+    pager = less -F
+    editor = emacs -nw
+
+[alias]
+    history = log --graph --pretty=format:'%C(yellow)%h%Creset \
+        -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' \
+        --abbrev-commit --date=short --date-order -n30
+
+    c = clone
+    pl = pull
+    ps = push
+    co = checkout
+    unstage = reset HEAD --
+    discard = checkout --
+    update-branch = branch -f --no-track
+    cmt = commit -S -v
+
+    assume-unchanged = update-index --assume-unchanged
+    unassume-unchanged = update-index --no-assume-unchanged
+    list-assume-unchanged = !sh -c 'git ls-files -v | grep "^[a-z]" | sed "s/^..//"'
+    dt = difftool
+
+[color]
+    status = auto
+    diff = auto
+    branch = auto
+    interactive = auto
+    ui = auto
+
+[format]
+    pretty = fuller
+
+[user]
+    name = myoungho.pak
+    email = qkraudghgh@gmail.com
+[diff]
+    tool = vimdiff
+[difftool]
+    prompt = false
+[mergetool "fugitive"]
+    cmd = vim -f -c \"Gdiff\" \"$MERGED\"
+[merge]
+    tool = fugitive
+[http "https://gopkg.in"]
+	followRedirects = true

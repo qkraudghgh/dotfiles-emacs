@@ -1,0 +1,86 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+
+#
+#Add custom config directory for Prezto
+#
+
+fpath=($HOME/.zsh/prezto-themes $fpath)
+
+autoload -U promptinit; promptinit
+prompt pure
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
+for config_file ($HOME/.zsh/zsh.d/*.zsh) source $config_file
+
+#source $HOME/.LS_COLORS/ls_colors.zsh
+
+alias python="python3"
+
+# added by travis gem
+[ -f /Users/myoungho.pak/.travis/travis.sh ] && source /Users/myoungho.pak/.travis/travis.sh
+
+export NVM_DIR="/Users/myoungho.pak/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+export GOPATH=/Users/myoungho.pak/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+alias fuck='TF_CMD=$(TF_ALIAS=fuck PYTHONIOENCODING=utf-8 TF_SHELL_ALIASES=$(alias) thefuck $(fc -ln -1 | tail -n 1)) && eval $TF_CMD && print -s $TF_CMD'
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home
+
+# gpg-agent
+[ -f ~/.gpg-agent-info ] && source ~/.gpg-agent-info
+if [ -S "${GPG_AGENT_INFO%%:*}" ]; then  
+  export GPG_AGENT_INFO
+  export GPG_TTY=$(tty)
+else  
+  eval $( gpg-agent --daemon --write-env-file ~/.gpg-agent-info )
+fi  
+
+eval `/usr/libexec/path_helper -s`
+eval "$(rbenv init -)"
+eval "$(fasd --init auto)"
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _complete _ignored _approximate
+zstyle :compinstall filename '/Users/myoungho.pak/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+zstyle ':completion:*' menu select
+source /Users/myoungho.pak/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Elixer version manager
+test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
+
+export API_SECRET_VALUE="Ajcdt7632y4rywefv"
+export SLACK_CLIENT_ID="193315155424.194788594150"
+export SLACK_CLIENT_SECRET="8b3c533f94734f38e26c199de410c62f"
+export DB_USERNAME="root"
+export DB_PASSWORD="1234"
+export GOOGLE_API_KEY="AIzaSyDaPW1vqyEsyZfCmszXr9_yuWZJh9UrWlw"
+export GOOGLE_MAP_API_KEY="AIzaSyAr7ve6s3CEVMlWqOZI2VdFGisIjpc0Wuk"
+export WEB_ENDPOINT="localhost:4200"
+export SLACK_BOT_TOKEN="xoxb-195349013857-jvgcdglKuLsWesilrj0TwVKZ"
+export SLACK_VERIFICATION_TOKEN="QdJx8e516ZWH5J72gAKlFeqy"
+export SLACK_BOT_ID="U5RA90DR7"
+export SLACK_BOT_CHANNEL_ID="C5PUW6WHG"
+
+export PGDATA=/usr/local/var/postgres
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/myoungho.pak/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/myoungho.pak/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/myoungho.pak/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/myoungho.pak/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
